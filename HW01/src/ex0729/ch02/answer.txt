@@ -1,0 +1,31 @@
+Q1: 4번
+
+Q2: 2번, 3번, 6번, 7번
+
+Q3: 정수형 - 1byte - byte
+              - 2byte - short, char
+              - 4byte - int
+              - 8byte - long
+
+     실수형 - 4byte - float
+              - 8byte - double
+
+     논리타입 - boolean
+
+Q4: 타입 - int, double
+     변수 이름 - age, price
+      리터럴 - 10, 3.14
+
+Q5: 3번
+
+Q6: 4번
+
+Q7: 3번
+
+Q8: 3번
+
+Q9: 1번
+
+Q10: 2번
+
+Q11: 13라인, 16라인

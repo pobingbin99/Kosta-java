@@ -1,0 +1,14 @@
+Q1: 31
+ 
+Q2: 가
+
+Q3: pencils / students
+     pencils % students
+
+Q4: value / 100 * 100
+
+Q5: 1번, 2번, 3번, 4번
+
+Q6: true, false
+
+Q7: Double.isNaN(z)
