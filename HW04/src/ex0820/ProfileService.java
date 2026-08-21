@@ -7,48 +7,58 @@ import java.io.IOException;
 
 public class ProfileService {
 
-	public int insert(Profile profile) {
-		File file = new File(profile.getName() + ".txt");
+    public void insert(Profile profile) throws IOException {
+        File file = new File(profile.getName() + ".txt");
 
-		try {
-			if (!file.createNewFile()) return -1;
-			
-			String data = profile.getWeight() + ":" + profile.getPassword();
+        if (!file.createNewFile()) throw new IOException("이미 존재하므로 다시 입력하세요.");
 
-			FileOutputStream fos = new FileOutputStream(file);
-			fos.write(data.getBytes());
-			fos.close();
+        String data = profile.getWeight() + ":" + profile.getPassword();
+        
+        FileOutputStream fos = null;
+        
+        try {
+        	fos = new FileOutputStream(file);
+            fos.write(data.getBytes());
+        } catch(IOException e) {
+        	e.printStackTrace();
+        } finally {
+        	try {
+				if (fos != null) fos.close();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+        }
+    }
 
-			return 1;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    public Profile search(String name) throws IOException {
+        File file = new File(name + ".txt");
 
-		return 0;
-	}
+        if (!file.exists()) throw new IOException(name + "에 해당하는 정보는 없습니다.");
 
-	public Profile search(String name) {
-		File file = new File(name + ".txt");
+        FileInputStream fis = null;
+        
+        try {
+        	fis = new FileInputStream(file);
+        	
+            byte[] data = new byte[(int) file.length()];
+            fis.read(data);
 
-		if (!file.exists()) return null;
+            String str = new String(data);
+            String[] arr = str.split(":");
 
-		try {
-			FileInputStream fis = new FileInputStream(file);
+            int weight = Integer.parseInt(arr[0]);
+            int password = Integer.parseInt(arr[1]);
 
-			byte[] data = new byte[(int) file.length()];
-			fis.read(data);
-			fis.close();
-
-			String str = new String(data);
-			String[] arr = str.split(":");
-
-			int weight = Integer.parseInt(arr[0]);
-			int password = Integer.parseInt(arr[1]);
-
-			return new Profile(name, weight, password);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+            return new Profile(name, weight, password);
+        } catch(IOException e) {
+        	e.printStackTrace();
+        } finally {
+        	try {
+				if (fis != null) fis.close();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+        }
 		return null;
-	}
+    }
 }
