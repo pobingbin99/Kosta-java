@@ -1,9 +1,13 @@
 package mvc.dto;
 
-public class Profile {
+import java.io.Serializable;
+
+public class Profile implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	private String name;
 	private int weight;
-	private int password;
+	private String password;
 	
 	/**
 	 * 기본 생성자
@@ -14,9 +18,9 @@ public class Profile {
 	/**
 	 * 파라미터 2개를 전달 받는 생성자
 	 * @param name - String
-	 * @param password - int
+	 * @param password - String
 	 */
-	public Profile(String name, int password) {
+	public Profile(String name, String password) {
 		this.name = name;
 		this.password = password;
 	}
@@ -25,9 +29,9 @@ public class Profile {
 	 * 파라미터 3개를 전달 받는 생성자
 	 * @param name - String
 	 * @param weight - int
-	 * @param password - int
+	 * @param password - String
 	 */
-	public Profile(String name, int weight, int password) {
+	public Profile(String name, int weight, String password) {
 		this(name, password);
 		this.weight = weight;
 	}
@@ -40,7 +44,7 @@ public class Profile {
 		return weight;
 	}
 	
-	public int getPassword() {
+	public String getPassword() {
 		return password;
 	}
 	
@@ -52,7 +56,7 @@ public class Profile {
 		this.weight = weight;
 	}
 
-	public void setPassword(int password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 	
